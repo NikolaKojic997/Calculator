@@ -7,6 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -71,7 +72,39 @@ public class Calculator {
         frame.setVisible(true);
         
    }
-   
+    
+    private void Add(){
+        String firstNumberString = firstNumberTextField.getText();
+        String secondNumberString = secondNumberTextField.getText();
+        
+        if(!isNumeric(firstNumberString) || !isNumeric(secondNumberString))
+        
+            JOptionPane.showMessageDialog(this.frame, "WARNING.","Warning",JOptionPane.WARNING_MESSAGE);
+        
+        Double a = Double.parseDouble(firstNumberString)+Double.parseDouble(secondNumberString);
+        this.resultTextField.setText(a.toString());
+    }
+    
+    private void Subtract(){
+        String firstNumberString = firstNumberTextField.getText();
+        String secondNumberString = secondNumberTextField.getText();
+        
+        if(!isNumeric(firstNumberString) || !isNumeric(secondNumberString))
+        
+            JOptionPane.showMessageDialog(this.frame, "WARNING.","Warning",JOptionPane.WARNING_MESSAGE);
+        
+        Double a = Double.parseDouble(firstNumberString)-Double.parseDouble(secondNumberString);
+        this.resultTextField.setText(a.toString());
+    }
+    
+    public static boolean isNumeric(String strNum) {
+    try {
+        double d = Double.parseDouble(strNum);
+    } catch (NumberFormatException | NullPointerException nfe) {
+        return false;
+    }
+    return true;
+   }
     public static void main(String[] args) {
         Calculator c = new Calculator();
     }
