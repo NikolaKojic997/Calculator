@@ -3,6 +3,8 @@ package calculator;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,16 +73,32 @@ public class Calculator {
         frame.add(panel);
         frame.setVisible(true);
         
+        this.addButton.addActionListener(new ActionListener() {
+             @Override
+            public void actionPerformed(ActionEvent e) {
+                 Add();
+            }
+        });
+        
+         this.subtractButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 Subtract();
+            }
+        });
+        
+        
    }
+    
     
     private void Add(){
         String firstNumberString = firstNumberTextField.getText();
         String secondNumberString = secondNumberTextField.getText();
         
-        if(!isNumeric(firstNumberString) || !isNumeric(secondNumberString))
-        
-            JOptionPane.showMessageDialog(this.frame, "WARNING.","Warning",JOptionPane.WARNING_MESSAGE);
-        
+        if(!isNumeric(firstNumberString) || !isNumeric(secondNumberString)){
+             JOptionPane.showMessageDialog(this.frame, "Value is not numeric.","ERROR",JOptionPane.WARNING_MESSAGE);
+             return;
+        }
         Double a = Double.parseDouble(firstNumberString)+Double.parseDouble(secondNumberString);
         this.resultTextField.setText(a.toString());
     }
@@ -90,9 +108,10 @@ public class Calculator {
         String secondNumberString = secondNumberTextField.getText();
         
         if(!isNumeric(firstNumberString) || !isNumeric(secondNumberString))
-        
-            JOptionPane.showMessageDialog(this.frame, "WARNING.","Warning",JOptionPane.WARNING_MESSAGE);
-        
+        {
+            JOptionPane.showMessageDialog(this.frame, "Value is not numeric.","ERROR",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Double a = Double.parseDouble(firstNumberString)-Double.parseDouble(secondNumberString);
         this.resultTextField.setText(a.toString());
     }
@@ -105,6 +124,7 @@ public class Calculator {
     }
     return true;
    }
+    
     public static void main(String[] args) {
         Calculator c = new Calculator();
     }
